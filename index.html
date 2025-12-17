@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع مشاركة النصوص - TextShare</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-comments"></i>
+                <span>TextShare</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" id="homeLink"><i class="fas fa-home"></i> الرئيسية</a></li>
+                    <li><a href="#" id="postsLink"><i class="fas fa-stream"></i> المنشورات</a></li>
+                    <li><a href="#" id="newPostLink" class="hidden"><i class="fas fa-plus-circle"></i> منشور جديد</a></li>
+                    <li><a href="#" id="adminLink" class="hidden"><i class="fas fa-user-shield"></i> لوحة التحكم</a></li>
+                    <li id="authButtons">
+                        <button id="loginBtn" class="btn btn-outline"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</button>
+                        <button id="registerBtn" class="btn btn-primary"><i class="fas fa-user-plus"></i> حساب جديد</button>
+                    </li>
+                    <li id="userMenu" class="hidden">
+                        <div class="user-dropdown">
+                            <span id="usernameDisplay"></span>
+                            <div class="dropdown-content">
+                                <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- قسم تسجيل الدخول -->
+        <section id="loginSection" class="hidden">
+            <div class="form-container">
+                <h2><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginUsername">اسم المستخدم</label>
+                        <input type="text" id="loginUsername" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">كلمة المرور</label>
+                        <input type="password" id="loginPassword" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">تسجيل الدخول</button>
+                </form>
+                <p class="form-footer">ليس لديك حساب؟ <a href="#" id="showRegister">سجل الآن</a></p>
+            </div>
+        </section>
+
+        <!-- قسم التسجيل -->
+        <section id="registerSection" class="hidden">
+            <div class="form-container">
+                <h2><i class="fas fa-user-plus"></i> إنشاء حساب جديد</h2>
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="registerUsername">اسم المستخدم</label>
+                        <input type="text" id="registerUsername" required>
+                        <small>يجب أن يكون بين 3-20 حرفاً</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">البريد الإلكتروني</label>
+                        <input type="email" id="registerEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">كلمة المرور</label>
+                        <input type="password" id="registerPassword" required>
+                        <small>يجب أن تكون 6 أحرف على الأقل</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">تأكيد كلمة المرور</label>
+                        <input type="password" id="confirmPassword" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">إنشاء الحساب</button>
+                </form>
+                <p class="form-footer">لديك حساب بالفعل؟ <a href="#" id="showLogin">سجل الدخول</a></p>
+            </div>
+        </section>
+
+        <!-- قسم المنشورات -->
+        <section id="postsSection">
+            <div class="container">
+                <h2><i class="fas fa-stream"></i> أحدث المنشورات</h2>
+                <div id="postsContainer" class="posts-grid">
+                    <!-- سيتم تحميل المنشورات هنا -->
+                </div>
+                <div id="loadingPosts" class="loading">
+                    <i class="fas fa-spinner fa-spin"></i> جاري تحميل المنشورات...
+                </div>
+                <div id="noPosts" class="hidden">
+                    <div class="empty-state">
+                        <i class="fas fa-comment-slash"></i>
+                        <h3>لا توجد منشورات بعد</h3>
+                        <p>كن أول من يشارك منشوراً!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم إنشاء منشور جديد -->
+        <section id="newPostSection" class="hidden">
+            <div class="form-container">
+                <h2><i class="fas fa-plus-circle"></i> إنشاء منشور جديد</h2>
+                <form id="newPostForm">
+                    <div class="form-group">
+                        <label for="postContent">محتوى المنشور</label>
+                        <textarea id="postContent" rows="6" placeholder="اكتب ما تريد مشاركته..." required></textarea>
+                        <small>يمكنك مشاركة أي أفكار، آراء، أو أي شيء تريده!</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">نشر المنشور</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- لوحة تحكم المدير -->
+        <section id="adminSection" class="hidden">
+            <div class="container">
+                <h2><i class="fas fa-user-shield"></i> لوحة تحكم المدير</h2>
+                <div class="admin-stats">
+                    <div class="stat-card">
+                        <h3 id="totalUsers">0</h3>
+                        <p>إجمالي المستخدمين</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="totalPosts">0</h3>
+                        <p>إجمالي المنشورات</p>
+                    </div>
+                </div>
+                
+                <div class="admin-tabs">
+                    <button class="tab-btn active" data-tab="usersTab">المستخدمين</button>
+                    <button class="tab-btn" data-tab="postsTab">المنشورات</button>
+                </div>
+                
+                <div class="tab-content active" id="usersTab">
+                    <h3><i class="fas fa-users"></i> إدارة المستخدمين</h3>
+                    <div class="table-container">
+                        <table id="usersTable">
+                            <thead>
+                                <tr>
+                                    <th>المعرف</th>
+                                    <th>اسم المستخدم</th>
+                                    <th>البريد الإلكتروني</th>
+                                    <th>صلاحية</th>
+                                    <th>تاريخ التسجيل</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- سيتم تعبئة الجدول بالبيانات -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="postsTab">
+                    <h3><i class="fas fa-comments"></i> إدارة المنشورات</h3>
+                    <div id="adminPostsContainer">
+                        <!-- سيتم تعبئة المنشورات هنا -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- نافذة التنبيهات -->
+    <div id="notification" class="notification hidden"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
